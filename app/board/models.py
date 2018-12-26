@@ -14,7 +14,7 @@ class DomesticCarTalkBoard(models.Model):
 
     # relational model fields
     tags = models.ManyToManyField('BrandTags', related_name='boards')
-    users = models.ManyToManyField('User', related_name='posts')
+    user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
 
 
 class BrandTags(models.Model):
@@ -26,7 +26,7 @@ class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now=True)
     modified_at = models.DateTimeField(auto_now_add=True)
-    user = models.ManyToManyField('User', related_name='comments')
+    user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
 
 
 class PostImages(models.Model):

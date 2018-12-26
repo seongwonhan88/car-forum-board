@@ -2,11 +2,11 @@ import json
 import os
 
 # DIRECTORY SETTINGS
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 
 # SECRET FILES ACCESS
-SECRET_DIR = os.path.join(BASE_DIR, '.secrets')
+SECRET_DIR = os.path.join(ROOT_DIR, '.secrets')
 secrets = json.load(open(os.path.join(SECRET_DIR, 'base.json')))
 
 # SECRET KEY

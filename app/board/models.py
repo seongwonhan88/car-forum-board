@@ -30,6 +30,6 @@ class Comment(models.Model):
 
 
 class PostImages(models.Model):
-    post = models.ForeignKey('DomesticCarTalkBoard', related_name='images')
+    post = models.ForeignKey('DomesticCarTalkBoard', related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='post')
     created_at = models.DateTimeField(auto_now=True)

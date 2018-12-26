@@ -8,7 +8,7 @@ class DomesticCarTalkBoard(models.Model):
     title = models.CharField(max_length=200, blank=False, null=False)
     created_at = models.DateTimeField(auto_now=True)
     modified_at = models.DateTimeField(auto_now_add=True)
-    view_count = models.PositiveIntegerField()
+    view_count = models.PositiveIntegerField(default=0)
     content = models.TextField()
     is_notification = models.BooleanField(default=False)
 
@@ -16,9 +16,10 @@ class DomesticCarTalkBoard(models.Model):
     tags = models.ManyToManyField('BrandTags', related_name='boards')
     users = models.ManyToManyField('User', related_name='posts')
 
+
 class BrandTags(models.Model):
     manufacturer = models.CharField(max_length=200)
-    brand_logo = models.ImageField(upload_to='logo')
+    logo_image = models.ImageField(upload_to='logo')
 
 
 class Comment(models.Model):
@@ -29,5 +30,6 @@ class Comment(models.Model):
 
 
 class PostImages(models.Model):
-    post_id = models.ForeignKey('DomesticCarTalkBoard')
+    post = models.ForeignKey('DomesticCarTalkBoard', related_name='images')
     image = models.ImageField(upload_to='post')
+    created_at = models.DateTimeField(auto_now=True)

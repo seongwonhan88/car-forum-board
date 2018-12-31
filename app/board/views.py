@@ -4,7 +4,7 @@ from .models import DomesticCarTalkBoard
 
 
 def post_list_view(request):
-    if request == 'GET':
+    if request.method == 'GET':
         posts = DomesticCarTalkBoard.objects.all().prefetch_related('tags', 'posts')
         context = {
             'posts': posts,

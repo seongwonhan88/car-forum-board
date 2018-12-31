@@ -5,11 +5,11 @@ User = get_user_model()
 
 class LoginForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self._user = None
 
     username = forms.CharField(
-        widget= forms.TextInput(
+        widget=forms.TextInput(
             attrs={'class': 'form-control'}
         )
     )

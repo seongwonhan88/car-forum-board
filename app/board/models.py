@@ -16,11 +16,16 @@ class DomesticCarTalkBoard(models.Model):
     tags = models.ManyToManyField('BrandTags', related_name='boards')
     user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
+
 
 class BrandTags(models.Model):
     manufacturer = models.CharField(max_length=200)
     logo_image = models.ImageField(upload_to='logo')
 
+    def __str__(self):
+        return self.manufacturer
 
 class Comment(models.Model):
     content = models.TextField()

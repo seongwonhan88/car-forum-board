@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 {% for tag in post.tags.all %}
-                    <a href="" class="card-text">#{{ tag }}</a>
+                    <a href="{% url 'board:tag-list' tag=tag %}" class="card-text">#{{ tag }}</a>
                 {% endfor %}
             </div>
             <div class="card-footer">

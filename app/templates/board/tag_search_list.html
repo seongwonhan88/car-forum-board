@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h3>TAG 글 보기</h3>
+    <h3>{{ tag }} 글 보기</h3>
     <div class="container-fluid">
         <div class="row align-items-start font-weight-bold">
             <div class="col">#</div>
@@ -13,12 +13,8 @@
         {% for post in posts %}
             <div class="row">
                 <div class="col">{{ post.pk }}</div>
-                {% for tag in post.tags.all %}
-                    {% if forloop.last %}
-                        <a href="#" class="col">{{ tag }}</a>
-                    {% endif %}
-                {% endfor %}
-                <div class="col-5"><a href="{{ post.pk }}/">{{ post.title }}</a></div>
+                    <a href="#" class="col">{{ tag }}</a>
+                <div class="col-5"><a href="{% url 'board:post-detail' pk=post.pk %}">{{ post.title }}</a></div>
                 <div class="col">{{ post.user }}</div>
                 <div class="col">{{ post.view_count }}</div>
             </div>

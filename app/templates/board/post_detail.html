@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-header">{{ post.user }}</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">
+                    <small class="text-muted">{{ post.created_at }}</small>
+                </p>
+
+                {% for photo in post.images.all %}
+                    <img src="{{ photo.image.url }}" alt="" class="card-img-top">
+                {% endfor %}
+                <p class="card-text">{{ post.content }}</p>
+            </div>
+            <div class="card-body">
+                {% for tag in post.tags.all %}
+                    <a href="" class="card-text">#{{ tag }}</a>
+                {% endfor %}
+            </div>
+            <div class="card-footer">
+                {% for comment in comments %}
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{ comment.user }}: {{ comment.content }}
+                        </p>
+                        <small class="text-muted">{{ comment.created_at }}</small>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

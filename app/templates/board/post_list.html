@@ -1,5 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>post_list_page</h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Title</th>
+                <th scope="col">Owner</th>
+            </tr>
+        </thead>
+        {% for post in posts %}
+            <tbody>
+            <th scope="row">{{ post.pk }}</th>
+            {% for tag in post.tags.all %}
+                {% if forloop.last %}
+                <td>{{ tag }}</td>
+                {% endif %}
+            {% endfor %}
+            <td>{{ post.title }}</td>
+            <td>{{ post.user }}</td>
+
+            </tbody>
+
+        {% endfor %}
+    </table>
 {% endblock %}

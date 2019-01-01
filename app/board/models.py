@@ -22,16 +22,18 @@ class DomesticCarTalkBoard(models.Model):
 
 class BrandTags(models.Model):
     manufacturer = models.CharField(max_length=200)
-    logo_image = models.ImageField(upload_to='logo')
+    logo_image = models.ImageField(upload_to='logo', blank=True, null=True)
 
     def __str__(self):
         return self.manufacturer
+
 
 class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now=True)
     modified_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(DomesticCarTalkBoard, related_name='comment', on_delete=models.CASCADE)
 
 
 class PostImages(models.Model):

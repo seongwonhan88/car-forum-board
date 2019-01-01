@@ -26,10 +26,11 @@ def post_detail_view(request, pk):
 
 def tag_search_list_view(request, tag):
     if request.method == 'GET':
-        post = DomesticCarTalkBoard.objects.filter(tags=tag)
-        if post:
+        posts = DomesticCarTalkBoard.objects.filter(tags__manufacturer__contains=tag).prefetch_related('tags', 'user')
+        if posts:
             context = {
-                'post': post,
+                'posts': posts,
+                'tag': tag,
             }
             return render(request, 'board/tag_search_list.html', context)
         return redirect('board:post-detail')

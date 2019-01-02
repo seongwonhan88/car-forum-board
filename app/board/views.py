@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 
+from .forms import PostForm
 from .models import DomesticCarTalkBoard
 
 
@@ -34,3 +35,22 @@ def tag_search_list_view(request, tag):
             }
             return render(request, 'board/tag_search_list.html', context)
         return redirect('board:post-detail')
+
+
+def post_create_view(request):
+    context = {}
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            tags = form.cleaned_data['tags']
+            post.save()
+            if tags:
+                for tag in tags:
+                    post.tags.add(tag)
+            return redirect('board:post-list')
+    else:
+        form = PostForm()
+    context['form'] = form
+    return render(request, 'board/post_create.html', context)

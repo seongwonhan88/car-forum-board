@@ -23,13 +23,14 @@
                 <a class="nav-item nav-link active" href="{% url 'board:post-list' %}">Home<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="#">Features</a>
                 {% if user.is_authenticated %}
+                    <a href="{% url 'board:post-create' %}" class="nav-item nav-link">+ New Post</a>
                     <form action="{% url 'members:logout' %}" method="post">
                         {% csrf_token %}
-                    <button class="nav-item nav-link" type="submit">Log out</button>
+                    <button class="btn btn-outline-primary" type="submit">Log out</button>
                     </form>
                 {% else %}
-                    <a class="nav-item nav-link" href="{% url 'members:login' %}">Log in</a>
                     <a href="{% url 'members:signup' %}" class="nav-item nav-link">Sign up</a>
+                    <a class="btn btn-outline-primary" href="{% url 'members:login' %}">Log in</a>
                 {% endif %}
             </div>
         </div>

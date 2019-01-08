@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import FormView
 
 from .forms import PostForm
 from .models import DomesticCarTalkBoard
@@ -54,3 +55,4 @@ def post_create_view(request):
         form = PostForm()
     context['form'] = form
     return render(request, 'board/post_create.html', context)
+

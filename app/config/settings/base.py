@@ -127,3 +127,5 @@ USE_L10N = True
 
 USE_TZ = True
 
+# CELERY CONFIG
+BROKER_URL = 'ampq://guest:guest@localhost:5672//'

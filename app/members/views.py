@@ -1,8 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
+from django.views.generic import FormView
 
-from .forms import LoginForm, SignupForm
-
+from .forms import LoginForm, SignupForm, GenerateRandomUserForm
+from .tasks import create_random_user
 
 def login_view(request):
     context = {}
@@ -40,3 +42,15 @@ def signup_view(request):
         form = SignupForm()
     context['form'] = form
     return render(request, 'members/signup.html', context)
+
+
+class GenerateRandomUserView(FormView):
+    template_name = 'members/generate_random_users.html'
+    form_class = GenerateRandomUserForm
+
+
+    def form_valid(self, form):
+        total = form.cleaned_data.get('total')
+        create_random_user.delay(total)
+        messages.success(self.request, 'Generating users...')
+        return redirect('board:post-list')

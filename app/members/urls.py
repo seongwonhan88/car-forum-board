@@ -7,5 +7,5 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup_view, name='signup'),
     path('logout/', views.logout_view, name='logout'),
-    path('generate/', views.create_random_user, name='generate')
+    path('generate/', views.GenerateRandomUserView.as_view(), name='generate')
 ]

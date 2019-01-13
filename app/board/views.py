@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
-from django.views.generic import FormView
 
 from .forms import PostForm
 from .models import DomesticCarTalkBoard
-
+from .tasks import count_up
 
 def post_list_view(request):
     if request.method == 'GET':
-        posts = DomesticCarTalkBoard.objects.all().prefetch_related('tags', 'user')
+        posts = DomesticCarTalkBoard.objects.all()
         context = {
             'posts': posts,
         }
@@ -17,7 +16,7 @@ def post_list_view(request):
 def post_detail_view(request, pk):
     if request.method == 'GET':
         post = DomesticCarTalkBoard.objects.get(pk=pk)
-        post.view_count += 1
+        count_up.delay(pk)
         comments = post.comment.all()
         context = {
             'post' : post,

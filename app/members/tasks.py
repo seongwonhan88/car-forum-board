@@ -8,8 +8,7 @@ User = get_user_model()
 
 @shared_task
 def create_random_user(total):
-    loop = range(total)
-    for number in range(loop):
+    for i in range(total):
         username = f'user_{get_random_string(10, string.ascii_letters)}'
         email = f'{username}@test.com'
         password = get_random_string(50)
